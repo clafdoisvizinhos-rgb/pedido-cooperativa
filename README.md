@@ -17,7 +17,7 @@
             background-color: #ffff00; 
         }
 
-        /* Correção para visibilidade do número digitado */
+        /* Redução de escala para mobile */
         input[type="number"] {
             -moz-appearance: textfield;
             appearance: textfield;
@@ -29,7 +29,7 @@
             margin: 0;
         }
 
-        /* Garante que o texto digitado seja preto e visível */
+        /* Garante visibilidade e reduz altura dos campos */
         input {
             color: #000 !important;
             opacity: 1 !important;
@@ -41,103 +41,98 @@
         }
         .animate-pop { animation: pop 0.3s ease-out forwards; }
         
-        /* Sticky button adjustment */
+        /* Botão mais denso */
         .btn-shadow {
-            box-shadow: 0 8px 0 rgb(21, 128, 61);
+            box-shadow: 0 4px 0 rgb(21, 128, 61);
         }
         .btn-shadow:active {
             box-shadow: none;
-            transform: translateY(4px);
+            transform: translateY(2px);
+        }
+
+        /* Ajuste de densidade das linhas da tabela */
+        .item-row td {
+            padding-top: 0.25rem !important;
+            padding-bottom: 0.25rem !important;
         }
     </style>
 </head>
-<body class="bg-gray-200 min-h-screen pb-10 font-sans">
+<body class="bg-gray-100 min-h-screen pb-6 font-sans">
 
-    <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl border-x border-gray-300">
+    <!-- Container com largura máxima reduzida para não esticar em telas maiores -->
+    <div class="max-w-[360px] mx-auto bg-white min-h-screen shadow-xl border-x border-gray-200">
         
-        <div class="bg-green-700 p-6 text-white text-center shadow-md">
-            <h1 class="text-3xl font-black uppercase tracking-tighter leading-none italic">Cooperativa<br>Familiar</h1>
-            <div class="mt-2 h-1 w-20 bg-yellow-400 mx-auto"></div>
-            <p class="text-[10px] font-bold opacity-90 mt-2 uppercase tracking-widest">Sistema de Entrega de Produtos</p>
+        <!-- Cabeçalho Compacto -->
+        <div class="bg-green-700 p-4 text-white text-center shadow-sm">
+            <h1 class="text-2xl font-black uppercase tracking-tighter italic">Cooperativa<br>Familiar</h1>
+            <div class="mt-1 h-1 w-12 bg-yellow-400 mx-auto"></div>
+            <p class="text-[8px] font-bold opacity-90 mt-1 uppercase tracking-widest">Sistema de Entrega</p>
         </div>
 
-        <form id="meuFormulario" class="p-4 space-y-6">
+        <form id="meuFormulario" class="p-3 space-y-4">
             
-            <div class="space-y-4 bg-gray-50 p-4 rounded-xl border-2 border-dashed border-gray-400">
-                <div>
-                    <label class="block text-sm font-black text-gray-700 mb-1 uppercase italic">
-                        1. Qual o seu Nome?
-                    </label>
-                    <input 
-                        type="text" 
-                        name="nome"
-                        class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-green-600 outline-none text-xl font-bold shadow-sm placeholder-gray-300 text-black"
-                        placeholder="Escreva aqui seu nome"
-                        required
-                    >
+            <!-- Campos de Identificação Menores -->
+            <div class="grid grid-cols-2 gap-2 bg-gray-50 p-3 rounded-lg border border-gray-300">
+                <div class="col-span-2">
+                    <label class="block text-[10px] font-black text-gray-700 mb-0.5 uppercase italic">1. Nome do produtor</label>
+                    <input type="text" name="nome" class="w-full p-2 border border-gray-300 rounded focus:border-green-600 outline-none text-sm font-bold text-black" placeholder="Digite o aqui" required>
                 </div>
-                <div>
-                    <label class="block text-sm font-black text-gray-700 mb-1 uppercase italic">
-                        2. Dia da Entrega:
-                    </label>
-                    <input 
-                        type="date" 
-                        name="data"
-                        id="campoData"
-                        class="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-green-600 outline-none text-xl font-bold shadow-sm text-black"
-                        required
-                    >
+                <div class="col-span-2">
+                    <label class="block text-[10px] font-black text-gray-700 mb-0.5 uppercase italic">2. Data</label>
+                    <input type="date" name="data" id="campoData" class="w-full p-2 border border-gray-300 rounded focus:border-green-600 outline-none text-sm font-bold text-black" required>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 py-3 px-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg">
-                <span class="text-2xl">✍️</span>
-                <p class="text-xs font-bold text-yellow-900 uppercase">
-                    Digite a quantidade ao lado do produto que vai entregar.
+            <!-- Instrução Compacta -->
+            <div class="flex items-center gap-2 py-2 px-3 bg-yellow-50 border-l-4 border-yellow-400 rounded-r">
+                <span class="text-lg">✍️</span>
+                <p class="text-[9px] font-bold text-yellow-900 uppercase leading-tight">
+                    Digite a quantidade ao lado do produto.
                 </p>
             </div>
 
-            <div class="border-2 border-black rounded-lg overflow-hidden shadow-lg bg-white">
+            <!-- Tabela Super Densa -->
+            <div class="border border-black rounded overflow-hidden bg-white">
                 <table class="w-full border-collapse fonte-cupom">
                     <thead>
                         <tr class="cabecalho-tabela">
-                            <th class="border-b-2 border-black p-3 text-sm font-black uppercase text-left w-2/3">PRODUTO</th>
-                            <th class="border-b-2 border-black p-3 text-sm font-black uppercase text-center w-1/3">QTD.</th>
+                            <th class="border-b border-black p-2 text-[10px] font-black uppercase text-left w-2/3">PRODUTO</th>
+                            <th class="border-b border-black p-2 text-[10px] font-black uppercase text-center w-1/3">QTD.</th>
                         </tr>
                     </thead>
-                    <tbody id="listaProdutos" class="divide-y divide-gray-200">
+                    <tbody id="listaProdutos" class="divide-y divide-gray-100">
                     </tbody>
                 </table>
             </div>
 
-            <div class="sticky bottom-4 px-2 pb-4">
+            <!-- Botão de Enviar Menor e Fixo -->
+            <div class="sticky bottom-2 pt-2">
                 <button 
                     type="submit"
                     id="btnEnviar"
-                    class="w-full bg-green-600 hover:bg-green-700 text-white py-6 rounded-2xl font-black text-2xl btn-shadow transition-all transform uppercase flex items-center justify-center gap-3"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-black text-lg btn-shadow transition-all transform uppercase flex items-center justify-center gap-2"
                 >
                     <span>ENVIAR AGORA</span>
-                    <span class="text-3xl">➔</span>
+                    <span class="text-xl">➔</span>
                 </button>
             </div>
         </form>
 
-        <div class="text-center text-gray-400 text-[9px] py-10 uppercase font-bold tracking-widest">
-            *** FIM DO FORMULÁRIO ***<br>
-            VERSÃO PARA IMPRESSÃO TÉRMICA 2024
+        <div class="text-center text-gray-400 text-[8px] py-6 uppercase font-bold tracking-widest">
+            *** FIM DO FORMULÁRIO ***
         </div>
     </div>
 
     <!-- Modal Sucesso -->
-    <div id="modalSucesso" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-6 z-50">
-        <div class="bg-white p-8 rounded-3xl text-center max-w-xs w-full border-4 border-green-500 shadow-2xl animate-pop">
-            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl font-bold">
+    <div id="modalSucesso" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white p-6 rounded-2xl text-center max-w-[280px] w-full border-4 border-green-500 shadow-2xl animate-pop">
+            <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl font-bold">
                 ✓
             </div>
-            <h2 class="text-2xl font-black text-green-700 uppercase mb-2">Tudo Certo!</h2>
-            <p class="text-gray-600 font-bold mb-6 text-sm">O seu pedido de entrega foi recebido pela cooperativa.</p>
-            <button onclick="fecharModal()" class="w-full bg-green-600 text-white py-4 rounded-xl font-black uppercase tracking-widest text-lg shadow-lg active:scale-95 transition-transform">
-                CONCLUÍDO
+            <h2 class="text-xl font-black text-green-700 uppercase mb-1">Enviado!</h2>
+            <p class="text-gray-600 font-bold mb-4 text-xs italic text-center">Pedido recebido com sucesso.</p>
+            <button onclick="location.reload()" class="w-full bg-green-600 text-white py-3 rounded-lg font-black uppercase text-sm">
+                FECHAR
             </button>
         </div>
     </div>
@@ -159,19 +154,19 @@
         const tbody = document.getElementById('listaProdutos');
         produtos.forEach((prod, index) => {
             const tr = document.createElement('tr');
-            tr.className = "border-b border-gray-100 items-center hover:bg-gray-50 transition-colors";
+            tr.className = "item-row border-b border-gray-100 items-center";
             const idPlanilha = prod.normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '_');
             
             tr.innerHTML = `
-                <td class="p-3">
-                    <label class="flex items-center gap-3 cursor-pointer select-none py-2">
-                        <input type="checkbox" id="check_${index}" class="w-6 h-6 rounded border-gray-300 text-green-600 focus:ring-green-500">
-                        <span class="text-base font-bold text-gray-800 uppercase">${prod}</span>
+                <td class="p-2">
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" id="check_${index}" class="w-4 h-4 rounded border-gray-300 text-green-600">
+                        <span class="text-[11px] font-bold text-gray-800 uppercase tracking-tighter">${prod}</span>
                     </label>
                 </td>
-                <td class="p-2">
+                <td class="p-1">
                     <input type="number" name="${idPlanilha}" min="0" inputmode="numeric"
-                           class="w-full p-3 border-2 border-gray-200 rounded-lg text-center text-xl font-black bg-gray-50 focus:bg-white focus:border-green-500 outline-none text-black"
+                           class="w-full p-1.5 border border-gray-200 rounded text-center text-sm font-black bg-gray-50 focus:bg-white focus:border-green-500 outline-none text-black"
                            placeholder="0"
                            oninput="document.getElementById('check_${index}').checked = (this.value > 0)">
                 </td>
@@ -185,12 +180,10 @@
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Link do seu Apps Script
             const URL_DO_SCRIPT = "https://script.google.com/macros/s/AKfycbwj9Pw6zH5ZVKVjqS5eomVO6kHSZUbtNmcVr6DeA8EmISvqmyTNtwuo-MWlwrdFCl17/exec";
 
             btn.disabled = true;
-            btn.innerHTML = `<span class="animate-pulse">ENVIANDO...</span>`;
+            btn.innerHTML = `<span class="animate-pulse text-sm">ENVIANDO...</span>`;
 
             const formData = new FormData(this);
             const params = new URLSearchParams();
@@ -201,7 +194,6 @@
                 }
             });
 
-            // Adiciona timestamp se não houver
             if(!params.has('timestamp')) params.append('timestamp', new Date().toLocaleString('pt-BR'));
 
             fetch(URL_DO_SCRIPT, {
@@ -213,13 +205,12 @@
                 modal.style.display = 'flex';
                 form.reset();
                 btn.disabled = false;
-                btn.innerHTML = `<span>ENVIAR AGORA</span><span class="text-3xl">➔</span>`;
-                document.getElementById('campoData').value = new Date().toISOString().split('T')[0];
+                btn.innerHTML = `<span>ENVIAR AGORA</span><span class="text-xl">➔</span>`;
             })
             .catch(() => {
-                alert("Erro ao enviar! Verifique sua conexão.");
+                alert("Erro ao enviar!");
                 btn.disabled = false;
-                btn.innerHTML = `<span>ENVIAR AGORA</span><span class="text-3xl">➔</span>`;
+                btn.innerHTML = `<span>ENVIAR AGORA</span>`;
             });
         });
 
