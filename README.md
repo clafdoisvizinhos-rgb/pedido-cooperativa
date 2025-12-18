@@ -117,7 +117,6 @@
         const container = document.getElementById('listaProdutos');
         produtos.forEach((prod) => {
             const div = document.createElement('div');
-            // py-1 torna a linha bem fina
             div.className = "item-row flex items-center justify-between px-3 py-1";
             div.innerHTML = `
                 <span class="text-[10px] font-bold text-gray-600 uppercase tracking-tight leading-tight">${prod.replace(/_/g, ' ')}</span>
