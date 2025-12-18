@@ -4,139 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cooperativa CLAF - Pedidos</title>
-    <!-- Importação do Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@500&display=swap');
         
         body {
             -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
         }
 
-        .fonte-cupom { 
-            font-family: 'Courier Prime', monospace; 
-        }
-        
-        .cabecalho-tabela { 
-            background-color: #ffff00; 
+        .mono { 
+            font-family: 'Roboto Mono', monospace; 
         }
 
-        @keyframes pop { 
-            0% { transform: scale(0.8); opacity: 0; } 
-            100% { transform: scale(1); opacity: 1; } 
-        }
-        .animate-pop { 
-            animation: pop 0.3s ease-out forwards; 
-        }
-
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
+        /* Estilo para remover setas do input number */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
 
-        .sombra-mobile {
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        .item-row:nth-child(even) {
+            background-color: #f9fafb;
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-50 min-h-screen">
 
-    <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg border-x border-gray-200 flex flex-col">
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-xl flex flex-col">
         
-        <!-- Cabeçalho Ajustado com Novo Nome -->
-        <header class="bg-green-700 p-4 text-white text-center shadow-md">
-            <h1 class="text-3xl font-black uppercase tracking-tighter italic leading-none">Cooperativa<br>CLAF</h1>
-            <div class="h-1 w-16 bg-yellow-400 mx-auto mt-2"></div>
-            <p class="text-[11px] font-bold opacity-90 mt-2 uppercase tracking-widest">Sistema de Entrega de Produtos</p>
+        <!-- Cabeçalho Premium -->
+        <header class="bg-green-700 pt-6 pb-4 px-4 text-center border-b-4 border-yellow-400">
+            <h1 class="text-white text-2xl font-black uppercase tracking-tight italic">
+                COOPERATIVA <span class="text-yellow-300">CLAF</span>
+            </h1>
+            <p class="text-green-100 text-[10px] uppercase tracking-[0.2em] font-bold mt-1">
+                Sistema de Entrega de Produtos
+            </p>
         </header>
 
-        <form id="meuFormulario" class="p-2 space-y-2 flex-grow">
+        <form id="meuFormulario" class="flex-grow p-4 space-y-4">
             
-            <!-- Identificação (Grid de 2 colunas para economizar altura) -->
-            <div class="grid grid-cols-2 gap-2 bg-yellow-50/30 p-2 rounded border border-green-100 sombra-mobile">
+            <!-- Bloco de Identificação -->
+            <div class="bg-white border border-gray-200 rounded-xl p-3 shadow-sm space-y-3">
                 <div>
-                    <label class="block text-[8px] font-black text-green-800 uppercase tracking-tighter">Produtor</label>
-                    <input type="text" name="nome" class="w-full p-1 border border-gray-300 rounded outline-none text-xs font-bold" placeholder="Nome" required>
+                    <label class="block text-[10px] font-black text-gray-500 uppercase mb-1 ml-1">Produtor Responsável</label>
+                    <input type="text" name="nome" required
+                           class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 text-sm font-bold focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all" 
+                           placeholder="Digite seu nome">
                 </div>
                 <div>
-                    <label class="block text-[8px] font-black text-green-800 uppercase tracking-tighter">Data Entrega</label>
-                    <input type="date" name="data" id="campoData" class="w-full p-1 border border-gray-300 rounded outline-none text-xs font-bold" required>
+                    <label class="block text-[10px] font-black text-gray-500 uppercase mb-1 ml-1">Data da Entrega</label>
+                    <input type="date" name="data" id="campoData" required
+                           class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 text-sm font-bold focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all">
                 </div>
             </div>
 
-            <!-- Tabela Ultra Compacta -->
-            <div class="border border-black rounded overflow-hidden sombra-mobile bg-white">
-                <table class="w-full border-collapse fonte-cupom">
-                    <thead>
-                        <tr class="cabecalho-tabela">
-                            <th class="border-b border-black px-2 py-1 text-[10px] font-black uppercase text-left w-3/4">Item</th>
-                            <th class="border-b border-black px-2 py-1 text-[10px] font-black uppercase text-center w-1/4">Qtd.</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listaProdutos" class="divide-y divide-gray-100">
-                        <!-- Produtos via JS -->
-                    </tbody>
-                </table>
+            <!-- Tabela de Produtos -->
+            <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <div class="bg-gray-100 px-3 py-2 border-b border-gray-200 flex justify-between items-center">
+                    <span class="text-[10px] font-black text-gray-600 uppercase">Descrição do Item</span>
+                    <span class="text-[10px] font-black text-gray-600 uppercase">Qtd</span>
+                </div>
+                
+                <div id="listaProdutos" class="divide-y divide-gray-100">
+                    <!-- Gerado por JS -->
+                </div>
             </div>
 
-            <!-- Botão Fixo/Compacto no Fim -->
-            <div class="pt-1 pb-2">
-                <button type="submit" id="btnEnviar" class="w-full bg-green-600 text-white py-3 rounded-lg font-black text-sm shadow-sm uppercase flex items-center justify-center gap-2 active:bg-green-800">
-                    <span>ENVIAR PEDIDO</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            <!-- Botão de Envio -->
+            <div class="pt-2">
+                <button type="submit" id="btnEnviar" 
+                        class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-black text-sm shadow-lg transform active:scale-[0.98] transition-all uppercase tracking-widest flex items-center justify-center gap-3">
+                    <span>Finalizar Pedido</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </button>
             </div>
         </form>
 
-        <footer class="text-center text-gray-300 text-[7px] py-2 uppercase font-bold tracking-widest bg-gray-50">
-            --- FIM ---
+        <footer class="py-6 text-center">
+            <div class="flex items-center justify-center gap-2 mb-1">
+                <div class="h-px w-8 bg-gray-200"></div>
+                <span class="text-[9px] font-black text-gray-300 uppercase tracking-tighter italic">Cooperativa CLAF</span>
+                <div class="h-px w-8 bg-gray-200"></div>
+            </div>
         </footer>
     </div>
 
     <!-- Modal de Sucesso -->
-    <div id="modalSucesso" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-6 z-50 backdrop-blur-sm">
-        <div class="bg-white p-6 rounded-2xl text-center max-w-xs w-full animate-pop border-4 border-green-500 shadow-2xl">
-            <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl">✓</div>
-            <h2 class="text-lg font-black text-green-800 uppercase mb-1">Enviado!</h2>
-            <p class="text-[10px] text-gray-500 font-bold mb-4">Seu pedido foi registrado.</p>
-            <button onclick="location.reload()" class="w-full bg-green-700 text-white py-2 rounded-lg font-black uppercase text-xs">NOVO</button>
+    <div id="modalSucesso" class="fixed inset-0 bg-green-900/90 hidden items-center justify-center p-6 z-50 backdrop-blur-md">
+        <div class="bg-white p-8 rounded-3xl text-center max-w-xs w-full shadow-2xl border-t-8 border-green-500">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h2 class="text-xl font-black text-gray-800 uppercase mb-2">Pedido Enviado!</h2>
+            <p class="text-sm text-gray-500 mb-6">Os dados foram registrados com sucesso na planilha.</p>
+            <button onclick="location.reload()" class="w-full bg-gray-900 text-white py-3 rounded-xl font-black uppercase text-xs tracking-widest">Novo Pedido</button>
         </div>
     </div>
 
     <script>
         const produtos = ["Abacate", "Abacaxi", "Banana_caturra", "Banana_maça_ou_prata", "Laranja_baiana_lima", "Laranja_Comum", "Maça", "Mamão", "Manga", "Maracujá", "Melancia", "Melão", "Pera", "Pêssego", "Tangerina_poncã", "Almeirão", "Acelga", "Agrião", "Alface", "Couve_Manteiga", "Escarola", "Espinafre", "Quiabo", "Repolho", "Rúcula", "Abobrinha_verde", "Beterraba", "Brócolis", "Cenoura", "Chuchu", "Couve_flor", "Milho_verde", "Pepino", "Tomate", "Vagem", "Leite_Pasteurizado", "Pão_Caseiro", "Alho_poró", "Cebola", "Cebolinha_Verde", "Limão", "Pimentão", "Rabanete", "Salsinha", "Batata_doce", "Batata_inglesa", "Iogurte"];
 
+        // Define data de hoje
         document.getElementById('campoData').value = new Date().toISOString().split('T')[0];
 
-        const tbody = document.getElementById('listaProdutos');
+        const container = document.getElementById('listaProdutos');
         produtos.forEach((prod) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="px-2 py-0.5 text-xs font-bold text-gray-700 uppercase leading-none">${prod.replace(/_/g, ' ')}</td>
-                <td class="p-0.5 text-center">
-                    <input type="number" name="${prod}" inputmode="numeric" pattern="[0-9]*" min="0" 
-                           class="w-full max-w-[60px] p-1 border border-gray-100 rounded text-center text-sm font-black bg-gray-50 focus:bg-white focus:border-green-500 outline-none" 
-                           placeholder="0">
-                </td>
+            const div = document.createElement('div');
+            div.className = "item-row flex items-center justify-between px-4 py-3";
+            div.innerHTML = `
+                <span class="text-xs font-bold text-gray-700 uppercase tracking-tight">${prod.replace(/_/g, ' ')}</span>
+                <input type="number" name="${prod}" inputmode="numeric" 
+                       class="w-16 bg-white border border-gray-300 rounded-lg py-1.5 text-center text-sm font-black focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-all" 
+                       placeholder="0" min="0">
             `;
-            tbody.appendChild(tr);
+            container.appendChild(div);
         });
 
         document.getElementById('meuFormulario').addEventListener('submit', function(e) {
             e.preventDefault();
             const URL_DO_SCRIPT = "https://script.google.com/macros/s/AKfycbwj9Pw6zH5ZVKVjqS5eomVO6kHSZUbtNmcVr6DeA8EmISvqmyTNtwuo-MWlwrdFCl17/exec"; 
+            
             const btn = document.getElementById('btnEnviar');
             btn.disabled = true;
-            btn.innerHTML = `<span class="animate-pulse">...</span>`;
+            btn.innerHTML = `<span class="animate-pulse">ENVIANDO...</span>`;
 
             const formData = new FormData(this);
             const data = { timestamp: new Date().toLocaleString('pt-BR') };
+            
             formData.forEach((value, key) => { 
                 if (value && value !== "0" && value !== "") data[key] = value; 
             });
@@ -149,9 +152,9 @@
                 document.getElementById('modalSucesso').style.display = 'flex';
                 window.scrollTo(0,0);
             }).catch(() => {
-                alert("Erro ao enviar.");
+                alert("Erro ao enviar pedido. Verifique sua internet.");
                 btn.disabled = false;
-                btn.innerHTML = `<span>ENVIAR PEDIDO</span>`;
+                btn.innerHTML = `<span>Finalizar Pedido</span>`;
             });
         });
     </script>
